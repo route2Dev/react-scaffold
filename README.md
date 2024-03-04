@@ -105,6 +105,34 @@ Add husky hook to `.husky/pre-commit`
 npx --no -- lint-staged --quiet
 ```
 
+## TypeScript / Vite
+Configure relative paths
+
+### tsconfig.json - add the following lines
+```
+    /* Paths */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+```
+
+### vite.config - add the following lines
+```
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+```
+
+## vscode settings
+### settings.json
+```
+"editor.defaultFormatter": "esbenp.prettier-vscode",
+"typescript.preferences.importModuleSpecifier": "non-relative"
+```
+
 ## git
 Add the project to git specifying `main` as the master branch
 ```bash
