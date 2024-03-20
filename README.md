@@ -42,6 +42,15 @@ npm i --save-dev eslint-plugin-react
 'plugin:react/jsx-runtime'
 ```
 
+- Add the following `settings` section to the `.eslint.cjs` file
+```js
+  settings: {
+    react: {
+      version: 'detect',
+    },
+  },
+```
+
 ## [Prettier](https://prettier.io/docs/en/install)
 ```bash
 npm i --save-dev prettier
@@ -61,6 +70,13 @@ Add the following lines
 # Ignore artifacts
 dist
 coverage
+```
+
+## [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)
+* eslintrc: Add "prettier" to the "extends" array in your .eslintrc.* file. Make sure to put it last, so it gets the chance to override other configs.
+```js
+// other extends
+"prettier"
 ```
 
 Format all files
@@ -108,7 +124,7 @@ npx --no -- lint-staged --quiet
 ## TypeScript / Vite
 Configure relative paths
 
-### tsconfig.json - add the following lines
+### tsconfig.json - add the following lines to the `"compilerOptions"` section
 ```
     /* Paths */
     "baseUrl": ".",
@@ -117,7 +133,13 @@ Configure relative paths
     }
 ```
 
-### vite.config - add the following lines
+### vite.config 
+- Import path (top of the file)
+```js
+import path from 'path;
+```
+
+- Add the following lines to `defineConfig`
 ```
   resolve: {
     alias: {
@@ -127,10 +149,32 @@ Configure relative paths
 ```
 
 ## vscode settings
+- Execute `Preferences: Open Workspace Settings (JSON)` from the vs code command palette
 ### settings.json
 ```
 "editor.defaultFormatter": "esbenp.prettier-vscode",
-"typescript.preferences.importModuleSpecifier": "non-relative"
+"typescript.preferences.importModuleSpecifier": "non-relative",
+"editor.formatOnSave": true
+```
+
+### Extension Recommendations
+Create the extensions.json
+```bash
+touch .vscode/extensions.json
+```
+
+Then paste the following lines in the extensions.json file.
+```json
+{
+  "recommendations": [
+    "mikestead.dotenv",
+    "dsznajder.es7-react-js-snippets",
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "christian-kohler.path-intellisense"
+  ]
+}
 ```
 
 ## git
